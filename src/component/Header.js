@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { setText } from "../redux/Slice/textSlice"
 import { useDispatch } from "react-redux";
-import "../style/ResortList.css"
+
 const Header=()=>{
     const [sorted,setSorted]=useState(0)
     const navigate=useNavigate()
@@ -24,7 +24,7 @@ const Header=()=>{
     }
     </div>
   <div className="box2">
-    <button onClick={()=>navigate("/Bucket")} className="save">
+    <button onClick={()=>navigate("/Bucket")} className="sort">
       ذخیره شده
     </button>
     <input
