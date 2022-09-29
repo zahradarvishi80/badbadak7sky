@@ -1,36 +1,18 @@
 import {BsBookmark,} from "react-icons/bs"
-import {BsBookmarkFill} from "react-icons/bs"
-import { useDispatch, useSelector } from "react-redux"
-import {setListBucket} from "../redux/Slice/BucketSlice"
 import "../style/ResortList.css"
-const Delete=({id,img,title,price,index})=>{
-    // const listBucket=useSelector(state=>state.Bucket.listBucket)
-    const dispatch=useDispatch()
-    // const fillout=()=>{
-    //     dispatch(
-    //         deleteItem({
-    //             id:id
-    //         })
-    //     )
-    //     alert("آیتم مورد نظر حذف شد")
-    // }
-    ////////////////////////
-    // const fillout = (id) => () =>
-    // dispatch(setListBucket((items) => items.filter((_, i) => i !== id)))
-    /////////////////////
-    // const fillout=(index)=>{
-    //     dispatch(setListBucket(i=>
-    //         i.filter(item=>{
-    //             return item.id !==index
-    //         })
-    //         ))
-    // }
+import { useContext } from "react"
+import { MyBucket } from "../Context"
+const Delete=({index})=>{
+    const[listBucket,setListBucket]=useContext(MyBucket)
+    const deleteItem = (index) => () =>{
+ 
+      setListBucket((items) => items.filter((_, i) => i !== index))}
+       console.log("oooooooooooooooo",listBucket);
+
     return(
         <div>  
-           <button className="button" 
-    
-           >
-             <BsBookmark size={13} fill="black" />
+           <button onClick={deleteItem(index)} className="button">
+             <BsBookmark size={13} fill="red" />
                 حذف
            </button>
          </div>
@@ -38,24 +20,3 @@ const Delete=({id,img,title,price,index})=>{
 }
 
 export default Delete
-
-
-
-
-
-// const [fill,setFill]=useState(0)
-
-    // const[list,setList]=useContext(MyList)
-
-    // const Save=()=>{
-    //     setFill(1)
-    //     let temp = [...list]
-    //     const items = {img, title, price,}
-    //     temp.push(items)
-    //     console.log("temp2", temp);
-    //     setList([...temp])
-    //   }
-    
-    // const UnSave=()=>{
-    //     setFill(0)
-    // }

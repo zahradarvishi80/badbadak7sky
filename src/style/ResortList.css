@@ -31,9 +31,7 @@
     display: flex;
     width: 100%;
     height:auto;
-    /* background-color: rgb(206, 39, 39); */
-    /* flex-direction: column; */
-    /* flex-wrap: wrap; */
+
     justify-content:flex-start;
     align-items:center;
 }
@@ -41,7 +39,6 @@
     display: flex;
     width: 200px;
     height:80px;
-    /* background-color: red; */
     justify-content: space-around;
 
 }
@@ -101,6 +98,15 @@
     /* margin:20px; */
     /* border-radius: 20px; */
     /* box-shadow: 0 0 3px 3px #d9dfdf9d; */
+    flex-direction: row;
+}
+.box3{
+    width:290px;
+    height: 100px;
+    /* background-color: rgba(29, 29, 238, 0.822); */
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
     flex-direction: row;
 }
 .title{

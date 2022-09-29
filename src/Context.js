@@ -1,14 +1,14 @@
 
 import React,{createContext, useState} from "react";
 
-export const MyClick=createContext()
+export const MyBucket=createContext()
 
 export const ContextProvider=({children})=>{
 
-    const[click,setClick]=useState(0)
+    const[listBucket,setListBucket]=useState([])
     return(
-        <MyClick.Provider value={[click,setClick]} >
+        <MyBucket.Provider value={[listBucket,setListBucket]} >
         {children}
-        </MyClick.Provider>
+        </MyBucket.Provider>
     )
 }

@@ -1,50 +1,33 @@
-
-import { Link } from "react-router-dom"
+import { useState } from "react";
 import resortlist from "../json/resortlist"
 import "../style/ResortList.css"
-import { useSelector } from "react-redux";
 import Header from "../component/Header"
-import Buck from "../component/BucketFill"
+import Sortbyprice from "../component/Sortedbyprice";
+import Listbyid from "../component/ListbyId";
+import End from "../component/End";
 
 const ResortList=()=>{
-    const text=useSelector(state=>state.Text.text)
-    
+  const [list,setList]=useState(resortlist.slice(0,20))
+  const[click,setClick]=useState(0)
+
+
+    const onSort=()=>{
+      setClick(1)
+      list.sort((a,b)=>{
+        return a.price-b.price
+       })
+      setList(list)
+     console.log("list",list);
+    }
     return(
         <div className="main"> 
-        <Header />
-        <div className="wrap">
-        {resortlist.length > 0 && (
-          <div className="item">
-            {resortlist.filter((val)=>{
-              if(text===""){
-                return val
-              }else if (val.title.toLowerCase().includes(text.toLowerCase())){
-                return val
-              }
-            })
-            .map((user,index) => (
-                <div className="box" key={index} id={user.id}>
-                     <nav>
-                     <Link to={`/ResortDetails/${user.id}`} state={{props:user}}  >
-                     <img  className="img" alt="resort" src={user.img}/> 
-                     </Link> 
-                     </nav>
-                     <div className="text">
-                     <p className="title"> {user.title}</p>
-                      <div className="cart">
-                     
-                        <p className="price"> {user.price}</p>
-                        <p  className="p">
-                        : شروع قیمت رزرو برای 1 شب</p>
-                        </div>
-                     <Buck img={user.img} id={user.id} title={user.title} price={user.price} index={index} />
-                    </div>
-                    </div>
-                    ))}
-                </div>
-                )}   
-           </div>
-           </div>
-         )
-        }
+        <Header onSort={onSort} />
+        {click===0?(
+        <Listbyid resortlist={resortlist.slice(0,20)}/> 
+        ):(
+        <Sortbyprice list={list} setList={setList} />
+        )}
+        <End/>
+        </div>
+        )}
 export default ResortList

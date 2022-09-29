@@ -1,22 +1,14 @@
-import { useContext, useState } from "react"
-import "../style/ResortList.css"
-import { useSelector } from "react-redux"
-import HeaderBucket from "../component/HeaderBucket"
-import Delete from "../component/Delete"
-import { MyBucket } from "../Context"
-const Bucket=()=>{
-const text=useSelector(state=>state.Text.text)
-// const listBucket=useSelector(state=>state.Bucket.listBucket)
-const[listBucket,setListBucket]=useContext(MyBucket)
 
+import { Link } from "react-router-dom"
+import { useSelector } from "react-redux";
+import Buck from "../component/BucketFill"
+const Sortbyprice=({list,setList})=>{
+    const text=useSelector(state=>state.Text.text)
     return(
-        <div className="main">
-            <HeaderBucket/>
-            <div className="wrap">
-      
-          {listBucket.length > 0 && (
+        <div className="wrap">
+        {list.length > 0 && (
           <div className="item">
-            {listBucket.filter((val)=>{
+            {list.filter((val)=>{
               if(text===""){
                 return val
               }else if (val.title.toLowerCase().includes(text.toLowerCase())){
@@ -25,9 +17,11 @@ const[listBucket,setListBucket]=useContext(MyBucket)
             })
             .map((user,index) => (
                 <div className="box" key={index} id={user.id}>
-                    
+                     <nav>
+                     <Link to={`/ResortDetails/${user.id}`} state={{props:user}}  >
                      <img  className="img" alt="resort" src={user.img}/> 
-  
+                     </Link> 
+                     </nav>
                      <div className="text">
                      <p className="title"> {user.title}</p>
                       <div className="cart">
@@ -36,13 +30,13 @@ const[listBucket,setListBucket]=useContext(MyBucket)
                         <p  className="p">
                         : شروع قیمت رزرو برای 1 شب</p>
                         </div>
-                     <Delete img={user.img} id={user.id} title={user.title} price={user.price} index={index} />
+                     <Buck img={user.img} id={user.id} title={user.title} price={user.price} index={index} />
                     </div>
                     </div>
                     ))}
                 </div>
                 )}   
-        </div>
-        </div>
-        )}
-export default Bucket
+           </div>
+    )
+}
+export default Sortbyprice

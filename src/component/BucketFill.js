@@ -1,17 +1,15 @@
-import {BsBookmark,} from "react-icons/bs"
+import { useContext } from "react"
 import {BsBookmarkFill} from "react-icons/bs"
-import { useDispatch, useSelector } from "react-redux"
-import {setListBucket} from "../redux/Slice/BucketSlice"
+import { MyBucket } from "../Context"
 import "../style/ResortList.css"
 const Buck=({id,img,title,price})=>{
-    const listBucket=useSelector(state=>state.Bucket.listBucket)
-    const dispatch=useDispatch()
+    const[listBucket,setListBucket]=useContext(MyBucket)
     const fillin=()=>{
     
         let temp=[...listBucket]
         const item={id,title,price,img}
         temp.push(item)
-        dispatch(setListBucket([...temp]))
+       setListBucket([...temp])
         console.log("temmp",temp);
         alert("آیتم مورد نظر ذخیره شد")
     }
@@ -28,23 +26,3 @@ const Buck=({id,img,title,price})=>{
 
 export default Buck
 
-
-
-
-
-// const [fill,setFill]=useState(0)
-
-    // const[list,setList]=useContext(MyList)
-
-    // const Save=()=>{
-    //     setFill(1)
-    //     let temp = [...list]
-    //     const items = {img, title, price,}
-    //     temp.push(items)
-    //     console.log("temp2", temp);
-    //     setList([...temp])
-    //   }
-    
-    // const UnSave=()=>{
-    //     setFill(0)
-    // }
